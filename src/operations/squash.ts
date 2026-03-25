@@ -30,9 +30,9 @@ export function squash(engine: GraphEngine, options: SquashOptions): MessageNode
     throw new Error('Branch has no nodes');
   }
 
-  // Find fork point (first node with multiple children or root)
+  // Find fork point (last node with multiple children, i.e. closest to the branch)
   let forkIdx = 0;
-  for (let i = 0; i < lineage.length; i++) {
+  for (let i = lineage.length - 1; i >= 0; i--) {
     if (lineage[i].children.length > 1) {
       forkIdx = i;
       break;

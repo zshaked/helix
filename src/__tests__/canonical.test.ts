@@ -68,5 +68,6 @@ describe('buildCanonicalMessages', () => {
 
     const pruneMarker = messages.find(m => m.content.includes('context pruned'));
     expect(pruneMarker).toBeTruthy();
+    expect(messages.length).toBe(4); // prune marker + 3 kept messages = maxMessages
   });
 });

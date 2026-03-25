@@ -70,9 +70,10 @@ export function buildCanonicalMessages(
 
   // Apply max messages limit
   if (maxMessages && alternating.length > maxMessages) {
-    const pruned = alternating.slice(alternating.length - maxMessages);
+    const keepCount = insertPruneMarkers ? maxMessages - 1 : maxMessages;
+    const dropped = alternating.length - keepCount;
+    const pruned = alternating.slice(alternating.length - keepCount);
     if (insertPruneMarkers) {
-      const dropped = alternating.length - maxMessages;
       pruned.unshift({
         role: 'system',
         content: `[context pruned: ${dropped} messages omitted]`,

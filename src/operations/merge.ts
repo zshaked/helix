@@ -33,13 +33,13 @@ export function merge(engine: GraphEngine, options: MergeOptions): MessageNode {
     case 'concatenate': {
       const sourceLineage = engine.getLineage(sourceLeaf);
       const lca = engine.findLCA(targetLeaf, sourceLeaf);
-      const uniqueNodes = lca
-        ? sourceLineage.filter(n => {
-            // Nodes after LCA
-            const lcaIdx = sourceLineage.findIndex(sn => sn.id === lca);
-            return sourceLineage.indexOf(n) > lcaIdx;
-          })
-        : sourceLineage;
+      let uniqueNodes: typeof sourceLineage;
+      if (lca) {
+        const lcaIdx = sourceLineage.findIndex(n => n.id === lca);
+        uniqueNodes = sourceLineage.slice(lcaIdx + 1);
+      } else {
+        uniqueNodes = sourceLineage;
+      }
       content = uniqueNodes.map(n => `[${n.role}]: ${n.content}`).join('\n\n');
       break;
     }
