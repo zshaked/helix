@@ -1,0 +1,23 @@
+{
+  "name": "helix-engine",
+  "version": "0.1.0",
+  "description": "DAG-structured conversation engine with git-like semantics",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": ["conversation", "dag", "llm", "branching", "merge"],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
+}
