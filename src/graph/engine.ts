@@ -162,6 +162,12 @@ export class GraphEngine {
       }
     }
 
+    if (sorted.length !== this.graph.nodes.size) {
+      throw new Error(
+        `Graph contains a cycle: sorted ${sorted.length} of ${this.graph.nodes.size} nodes`
+      );
+    }
+
     return sorted;
   }
 
